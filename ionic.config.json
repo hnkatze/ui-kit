@@ -1,0 +1,8 @@
+{
+  "name": "ui-kit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "a6982822"
+}
