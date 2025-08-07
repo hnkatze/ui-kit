@@ -1,0 +1,87 @@
+// Estilos personalizados para el UI Kit
+:host {
+  // Asegurar que el contenido sea visible
+  ion-content {
+    --background: #f8f9fa;
+    
+    @media (prefers-color-scheme: dark) {
+      --background: #1a1a1a;
+    }
+  }
+  
+  // Estilos para texto en modo oscuro
+  h1, h2, h3, h4, h5, h6, p, label, small {
+    color: #333333;
+    
+    @media (prefers-color-scheme: dark) {
+      color: #ffffff;
+    }
+  }
+}
+
+:host ::ng-deep {
+  // Ajustar el ancho de los componentes de PrimeNG
+  .p-inputtext,
+  .p-dropdown,
+  .p-multiselect,
+  .p-calendar,
+  .p-inputmask,
+  .p-password,
+  .p-inputnumber,
+  .p-select,
+  .p-datepicker {
+    width: 100%;
+  }
+
+  // Mejorar el espaciado de los paneles
+  .p-panel {
+    @apply shadow-md rounded-lg bg-white dark:bg-gray-800;
+    
+    .p-panel-header {
+      @apply bg-blue-50 dark:bg-blue-900;
+      color: #333333;
+      
+      @media (prefers-color-scheme: dark) {
+        color: #ffffff;
+      }
+    }
+    
+    .p-panel-content {
+      @apply bg-white dark:bg-gray-800;
+    }
+  }
+
+  // Estilo para las cards
+  .p-card {
+    @apply shadow-lg rounded-lg bg-white dark:bg-gray-800;
+    
+    .p-card-header,
+    .p-card-body,
+    .p-card-footer {
+      color: #333333;
+      
+      @media (prefers-color-scheme: dark) {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Mejorar la apariencia de los labels
+  label {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  // Espaciado consistente para los formularios
+  .p-field {
+    @apply mb-4;
+  }
+  
+  // Asegurar que los componentes de PrimeNG sean visibles
+  .p-component {
+    color: #333333;
+    
+    @media (prefers-color-scheme: dark) {
+      color: #ffffff;
+    }
+  }
+}

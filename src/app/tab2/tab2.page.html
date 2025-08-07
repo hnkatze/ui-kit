@@ -1,17 +1,113 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      <div class="title-container">
+        <span class="title-text">Visitas del Día</span>
+        <div class="live-time">
+          <i class="pi pi-clock"></i>
+          {{ currentTime | date:'HH:mm' }}
+        </div>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Header con estadísticas -->
+  <div class="stats-header">
+    <div class="stat-card completed">
+      <div class="stat-icon">
+        <i class="pi pi-check-circle"></i>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ completedCount }}</span>
+        <span class="stat-label">Completadas</span>
+      </div>
+    </div>
+    
+    <div class="stat-card in-progress">
+      <div class="stat-icon">
+        <i class="pi pi-sync"></i>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ inProgressCount }}</span>
+        <span class="stat-label">En Progreso</span>
+      </div>
+    </div>
+    
+    <div class="stat-card pending">
+      <div class="stat-icon">
+        <i class="pi pi-clock"></i>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ pendingCount }}</span>
+        <span class="stat-label">Pendientes</span>
+      </div>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- Lista de visitas -->
+  <div class="visits-container">
+    <div *ngFor="let visit of todayVisits" 
+         class="visit-card" 
+         [ngClass]="{'completed': visit.status === 'completed', 'in-progress': visit.status === 'in-progress'}"
+         (click)="navigateToDetail(visit)"
+         pRipple>
+      
+      <!-- Status indicator -->
+      <div class="status-indicator" [ngClass]="visit.status"></div>
+      
+      <!-- Card content -->
+      <div class="card-content">
+        <div class="card-header">
+          <div class="client-info">
+            <h3 class="client-name">{{ visit.clientName }}</h3>
+            <p-chip [label]="clientTypeLabels[visit.clientType]" 
+                    [style]="{'background-color': getClientTypeColor(visit.clientType), 'color': '#000'}"
+                    styleClass="client-type-chip"></p-chip>
+          </div>
+          <div class="time-badge">
+            <i class="pi pi-clock"></i>
+            <span>{{ visit.scheduledTime }}</span>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="info-row">
+            <i class="pi pi-map-marker"></i>
+            <span class="info-text">{{ visit.address }}</span>
+          </div>
+          
+          <div class="info-row">
+            <i class="pi pi-phone"></i>
+            <span class="info-text">{{ visit.phone }}</span>
+          </div>
+          
+          <div class="info-row" *ngIf="visit.contactPerson">
+            <i class="pi pi-user"></i>
+            <span class="info-text">{{ visit.contactPerson }}</span>
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <p-badge [value]="statusLabels[visit.status]" 
+                   [severity]="getStatusColor(visit.status)"
+                   styleClass="status-badge"></p-badge>
+          <button pButton 
+                  type="button" 
+                  icon="pi pi-arrow-right" 
+                  class="p-button-rounded p-button-text view-details-btn"
+                  (click)="navigateToDetail(visit); $event.stopPropagation()"></button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="todayVisits.length === 0" class="empty-state">
+    <i class="pi pi-calendar-times"></i>
+    <h3>No hay visitas programadas</h3>
+    <p>No tienes visitas programadas para hoy</p>
+  </div>
 </ion-content>

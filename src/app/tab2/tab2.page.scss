@@ -1,0 +1,387 @@
+// Variables de colores profesionales
+$primary-color: #0066ff;
+$primary-light: #4d94ff;
+$primary-dark: #0052cc;
+$success-color: #28a745;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$background: #f8f9fa;
+$card-bg: #ffffff;
+$text-primary: #212529;
+$text-secondary: #6c757d;
+$border-color: #dee2e6;
+$shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+
+:host {
+  ion-content {
+    --background: #{$background};
+  }
+
+  ion-toolbar {
+    --background: #{$card-bg};
+    --border-color: #{$border-color};
+    
+    .title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 8px;
+
+      .title-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $text-primary;
+      }
+
+      .live-time {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: $primary-color;
+        font-size: 0.85rem;
+        font-weight: 500;
+        
+        i {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+  }
+
+  // Estadísticas header
+  .stats-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .stat-card {
+      background: $card-bg;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: $shadow-sm;
+      border: 1px solid $border-color;
+      transition: all 0.2s ease;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .stat-icon {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+        
+        i {
+          color: $primary-color;
+        }
+      }
+
+      &.completed .stat-icon i {
+        color: $success-color;
+      }
+
+      &.in-progress .stat-icon i {
+        color: $warning-color;
+      }
+
+      &.pending .stat-icon i {
+        color: $primary-color;
+      }
+
+      .stat-info {
+        .stat-value {
+          display: block;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: $text-primary;
+          line-height: 1;
+          margin-bottom: 4px;
+        }
+
+        .stat-label {
+          font-size: 0.7rem;
+          color: $text-secondary;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+
+  // Contenedor de visitas
+  .visits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  // Tarjetas de visita
+  .visit-card {
+    background: $card-bg;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    transition: all 0.2s ease;
+
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+    }
+
+    &.completed {
+      opacity: 0.85;
+      
+      .status-indicator {
+        background: $success-color;
+      }
+    }
+
+    &.in-progress {
+      .status-indicator {
+        background: $warning-color;
+      }
+    }
+
+    // Indicador de estado
+    .status-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: $primary-color;
+      
+      &.completed {
+        background: $success-color;
+      }
+      
+      &.in-progress {
+        background: $warning-color;
+      }
+      
+      &.pending {
+        background: $primary-color;
+      }
+    }
+
+    // Contenido de la tarjeta
+    .card-content {
+      padding: 16px;
+      padding-left: 12px;
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+
+        .client-info {
+          flex: 1;
+          min-width: 0; // Para permitir truncate
+
+          .client-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $text-primary;
+            margin: 0 0 6px 0;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          ::ng-deep .p-chip {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            height: auto;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+          }
+        }
+
+        .time-badge {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          background: $background;
+          padding: 4px 8px;
+          border-radius: 16px;
+          font-size: 0.75rem;
+          color: $primary-color;
+          font-weight: 600;
+          white-space: nowrap;
+
+          i {
+            font-size: 0.7rem;
+          }
+        }
+      }
+
+      .card-body {
+        margin-bottom: 12px;
+
+        .info-row {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          margin-bottom: 8px;
+          color: $text-secondary;
+          font-size: 0.85rem;
+          line-height: 1.3;
+
+          i {
+            color: $primary-color;
+            font-size: 0.85rem;
+            width: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+          }
+
+          .info-text {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ::ng-deep .p-badge {
+          text-transform: capitalize;
+          font-size: 0.7rem;
+          font-weight: 500;
+        }
+
+        .view-details-btn {
+          background: transparent !important;
+          border: none !important;
+          color: $primary-color !important;
+          padding: 0.5rem !important;
+          width: 32px !important;
+          height: 32px !important;
+          transition: all 0.2s ease;
+
+          &:active {
+            background: rgba($primary-color, 0.1) !important;
+          }
+
+          ::ng-deep .p-button-icon {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+
+  // Estado vacío
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+
+    i {
+      font-size: 3rem;
+      color: $text-secondary;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h3 {
+      color: $text-primary;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    p {
+      color: $text-secondary;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Ajustes para pantallas pequeñas
+@media (max-width: 360px) {
+  :host {
+    .stats-header {
+      gap: 8px;
+      
+      .stat-card {
+        padding: 10px;
+        
+        .stat-info {
+          .stat-value {
+            font-size: 1.25rem;
+          }
+          
+          .stat-label {
+            font-size: 0.65rem;
+          }
+        }
+      }
+    }
+
+    .visit-card {
+      .card-content {
+        padding: 14px;
+        padding-left: 10px;
+
+        .card-header {
+          .client-name {
+            font-size: 0.95rem;
+          }
+
+          .time-badge {
+            font-size: 0.7rem;
+            padding: 3px 6px;
+          }
+        }
+
+        .card-body {
+          .info-row {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Efectos para PrimeNG
+:host ::ng-deep {
+  .p-chip {
+    border: none !important;
+  }
+  
+  .p-badge {
+    border-radius: 10px;
+  }
+  
+  .p-ripple {
+    .p-ink {
+      background: rgba($primary-color, 0.2) !important;
+    }
+  }
+}

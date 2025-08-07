@@ -1,0 +1,202 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de Visita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="visit">
+  <!-- Header con información principal -->
+  <div class="client-header">
+    <div class="client-avatar">
+      <p-avatar
+        [label]="visit.clientName.charAt(0)"
+        [style]="{'background-color': getClientTypeColor(visit.clientType), 'color': '#fff'}"
+        styleClass="client-avatar-icon"
+        size="xlarge"
+        shape="circle">
+      </p-avatar>
+    </div>
+
+    <h1 class="client-name">{{ visit.clientName }}</h1>
+
+    <div class="client-badges">
+      <p-chip
+        [label]="clientTypeLabels[visit.clientType]"
+        [style]="{'background-color': getClientTypeColor(visit.clientType), 'color': '#000'}"
+        styleClass="client-type-chip">
+      </p-chip>
+      <p-badge
+        [value]="statusLabels[visit.status]"
+        [severity]="getStatusColor(visit.status)"
+        styleClass="status-badge">
+      </p-badge>
+    </div>
+  </div>
+
+  <!-- Botones de acción rápida -->
+  <div class="action-buttons">
+    <button pButton
+            type="button"
+            icon="pi pi-phone"
+            label="Llamar"
+            class="p-button-rounded action-btn"
+            (click)="callClient()">
+    </button>
+    <button pButton
+            type="button"
+            icon="pi pi-envelope"
+            label="Email"
+            class="p-button-rounded action-btn"
+            (click)="emailClient()">
+    </button>
+    <button pButton
+            type="button"
+            icon="pi pi-map-marker"
+            label="Mapa"
+            class="p-button-rounded action-btn"
+            (click)="showMap()"
+            [disabled]="!visit.coordinates">
+    </button>
+  </div>
+
+  <!-- Información de la visita -->
+  <p-card styleClass="info-card">
+    <ng-template pTemplate="header">
+      <div class="card-header-custom">
+        <i class="pi pi-calendar"></i>
+        <span>Información de la Visita</span>
+      </div>
+    </ng-template>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Hora Programada</span>
+        <span class="info-value">{{ visit.scheduledTime }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Estado</span>
+        <span class="info-value">{{ statusLabels[visit.status] }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.notes">
+        <span class="info-label">Notas</span>
+        <span class="info-value">{{ visit.notes }}</span>
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Información de contacto -->
+  <p-card styleClass="info-card">
+    <ng-template pTemplate="header">
+      <div class="card-header-custom">
+        <i class="pi pi-user"></i>
+        <span>Información de Contacto</span>
+      </div>
+    </ng-template>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Persona de Contacto</span>
+        <span class="info-value">{{ visit.contactPerson || 'No especificado' }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Teléfono</span>
+        <span class="info-value">{{ visit.phone }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Email</span>
+        <span class="info-value">{{ visit.email || 'No especificado' }}</span>
+      </div>
+      <div class="info-item full-width">
+        <span class="info-label">Dirección</span>
+        <span class="info-value">{{ visit.address }}</span>
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Información general del cliente -->
+  <p-card styleClass="info-card">
+    <ng-template pTemplate="header">
+      <div class="card-header-custom">
+        <i class="pi pi-building"></i>
+        <span>Información General</span>
+      </div>
+    </ng-template>
+
+    <div class="info-grid">
+      <div class="info-item" *ngIf="visit.ruc">
+        <span class="info-label">RTN</span>
+        <span class="info-value">{{ visit.ruc }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.industry">
+        <span class="info-label">Industria</span>
+        <span class="info-value">{{ visit.industry }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.employees">
+        <span class="info-label">Empleados</span>
+        <span class="info-value">{{ visit.employees }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.website">
+        <span class="info-label">Sitio Web</span>
+        <span class="info-value">{{ visit.website }}</span>
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Información comercial -->
+  <p-card styleClass="info-card" *ngIf="visit.clientType !== 'new'">
+    <ng-template pTemplate="header">
+      <div class="card-header-custom">
+        <i class="pi pi-dollar"></i>
+        <span>Información Comercial</span>
+      </div>
+    </ng-template>
+
+    <div class="info-grid">
+      <div class="info-item" *ngIf="visit.lastVisit">
+        <span class="info-label">Última Visita</span>
+        <span class="info-value">{{ visit.lastVisit }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.totalPurchases">
+        <span class="info-label">Compras Totales</span>
+        <span class="info-value highlight">{{ visit.totalPurchases }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.creditLimit">
+        <span class="info-label">Límite de Crédito</span>
+        <span class="info-value">{{ visit.creditLimit }}</span>
+      </div>
+      <div class="info-item" *ngIf="visit.paymentTerms">
+        <span class="info-label">Términos de Pago</span>
+        <span class="info-value">{{ visit.paymentTerms }}</span>
+      </div>
+    </div>
+  </p-card>
+
+  <!-- Botón de completar visita -->
+  <div class="complete-visit-section" *ngIf="visit.status !== 'completed'">
+    <button pButton
+            type="button"
+            icon="pi pi-check"
+            label="Marcar como Completada"
+            class="p-button-success complete-btn"
+            (click)="completeVisit()">
+    </button>
+  </div>
+</ion-content>
+
+<!-- Mensaje si no se encuentra la visita -->
+<ion-content [fullscreen]="true" *ngIf="!visit" class="empty-state">
+  <div class="empty-container">
+    <i class="pi pi-exclamation-triangle"></i>
+    <h3>Visita no encontrada</h3>
+    <p>No se pudo cargar la información de esta visita</p>
+    <button pButton
+            type="button"
+            label="Volver al listado"
+            class="p-button-text"
+            (click)="goBack()">
+    </button>
+  </div>
+</ion-content>

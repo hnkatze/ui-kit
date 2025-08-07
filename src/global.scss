@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer reset, primeng;
+// tu CSS reset aquí
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -35,3 +41,50 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.custom.css"; */
+@import "primeicons/primeicons.css";
+
+// Asegurar que el contenido sea visible
+ion-content {
+  --background: #ffffff;
+
+  @media (prefers-color-scheme: dark) {
+    --background: #1a1a1a;
+  }
+}
+
+// Estilos para los componentes de PrimeNG
+.p-component {
+  font-family: var(--ion-font-family, inherit);
+}
+
+// Asegurar que los textos sean visibles
+body {
+  color: var(--ion-text-color, #000);
+
+  @media (prefers-color-scheme: dark) {
+    color: #ffffff;
+  }
+}
+
+// Estilos para inputs de PrimeNG
+.p-inputtext,
+.p-component input,
+.p-inputnumber input,
+.p-inputmask,
+.p-password input,
+.p-inputtextarea,
+.p-multiselect-label,
+.p-dropdown-label,
+.p-listbox-item {
+  color: #333333 !important;
+  
+  &::placeholder {
+    color: #999999 !important;
+  }
+}
+
+// Asegurar que los componentes tengan el texto correcto
+.p-component {
+  color: #333333;
+}

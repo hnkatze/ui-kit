@@ -1,0 +1,250 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      PrimeNG UI Kit
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #f5f5f5;">
+  <div style="width: 100%; margin: 0 auto; padding: 5px; background-color: #f5f5f5;">
+    <h1 style="color: #333; font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 2rem;">
+      PrimeNG Components UI Kit
+    </h1>
+
+    <!-- Input Components Section -->
+    <div class="" style="background: white; padding: 10px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 100%;">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Input Components</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+        <!-- Basic Input -->
+        <div>
+          <label style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Basic Input</label>
+          <input pInputText [(ngModel)]="inputValue" placeholder="Enter text" style="width: 100%;" />
+          <small style="color: #999; display: block; margin-top: 4px;">Standard text input</small>
+        </div>
+
+        <!-- Number Input -->
+        <div>
+          <label style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Number Input</label>
+          <p-inputNumber [(ngModel)]="numberValue" [showButtons]="true" mode="decimal" [min]="0" [max]="100" style="width: 100%;"></p-inputNumber>
+          <small style="color: #999; display: block; margin-top: 4px;">Number input with buttons</small>
+        </div>
+
+        <!-- Input Mask -->
+        <div>
+          <label style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Phone Input Mask</label>
+          <p-inputMask [(ngModel)]="phoneValue" mask="(999) 999-9999" placeholder="(999) 999-9999" [style]="{'width': '100%', 'color':'black'}"></p-inputMask>
+          <small style="color: #999; display: block; margin-top: 4px;">Input with mask format</small>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Password</label>
+          <p-password [(ngModel)]="passwordValue" [toggleMask]="true" style="width: 100%; color: black;"></p-password>
+          <small style="color: #999; display: block; margin-top: 4px;">Password with toggle visibility</small>
+        </div>
+
+        <!-- Float Label -->
+        <div>
+          <p-floatLabel>
+            <input pInputText id="username" [(ngModel)]="inputValue" style="width: 100%;" />
+            <label for="username" style="color: #666;">Username</label>
+          </p-floatLabel>
+          <small style="color: #999; display: block; margin-top: 4px;">Input with floating label</small>
+        </div>
+
+        <!-- Textarea -->
+        <div>
+          <label style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Textarea</label>
+          <textarea pTextarea [(ngModel)]="textareaValue" rows="3" style="width: 100%;" placeholder="Enter description"></textarea>
+          <small style="color: #999; display: block; margin-top: 4px;">Multi-line text input</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button Components Section -->
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Button Variants</h2>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <p-button label="Primary" icon="pi pi-check"></p-button>
+        <p-button label="Secondary" icon="pi pi-bookmark" severity="secondary"></p-button>
+        <p-button label="Success" icon="pi pi-check" severity="success"></p-button>
+        <p-button label="Info" icon="pi pi-info-circle" severity="info"></p-button>
+        <p-button label="Warning" icon="pi pi-exclamation-triangle" severity="warn"></p-button>
+        <p-button label="Danger" icon="pi pi-times" severity="danger"></p-button>
+        <p-button label="Help" icon="pi pi-question" severity="help"></p-button>
+        <p-button label="Contrast" severity="contrast"></p-button>
+      </div>
+
+      <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <p-button label="Raised" [raised]="true"></p-button>
+        <p-button label="Rounded" [rounded]="true"></p-button>
+        <p-button label="Text" [text]="true"></p-button>
+        <p-button label="Outlined" [outlined]="true"></p-button>
+        <p-button label="Link" [link]="true"></p-button>
+        <p-button icon="pi pi-heart" [rounded]="true" [text]="true" severity="danger"></p-button>
+        <p-button icon="pi pi-search" [rounded]="true" [outlined]="true"></p-button>
+        <p-button label="Small" size="small"></p-button>
+        <p-button label="Large" size="large"></p-button>
+        <p-button label="Loading" [loading]="true"></p-button>
+      </div>
+    </div>
+
+    <!-- Checkbox & Radio Section -->
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Selection Controls</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+        <!-- Checkboxes -->
+        <div>
+          <h3 style="color: #666; font-size: 1.1rem; margin-bottom: 12px;">Checkboxes</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <p-checkbox [(ngModel)]="checkboxValue" [binary]="true" inputId="check1"></p-checkbox>
+              <label for="check1" style="color: #666;">Accept terms and conditions</label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <p-checkbox [binary]="true" [disabled]="true" inputId="check2"></p-checkbox>
+              <label for="check2" style="color: #999;">Disabled checkbox</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radio Buttons -->
+        <div>
+          <h3 style="color: #666; font-size: 1.1rem; margin-bottom: 12px;">Radio Buttons</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <p-radioButton name="city" value="Chicago" [(ngModel)]="radioValue" inputId="city1"></p-radioButton>
+              <label for="city1" style="color: #666;">Chicago</label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <p-radioButton name="city" value="Los Angeles" [(ngModel)]="radioValue" inputId="city2"></p-radioButton>
+              <label for="city2" style="color: #666;">Los Angeles</label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <p-radioButton name="city" value="New York" [(ngModel)]="radioValue" inputId="city3"></p-radioButton>
+              <label for="city3" style="color: #666;">New York</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Switch -->
+        <div>
+          <h3 style="color: #666; font-size: 1.1rem; margin-bottom: 12px;">Toggle Switch</h3>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <p-toggleswitch [(ngModel)]="switchValue"></p-toggleswitch>
+            <label style="color: #666;">Enable notifications</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Component -->
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Card Component</h2>
+
+      <p-card header="Card Title" subheader="Card Subtitle" [style]="{'width': '100%', 'max-width': '400px'}">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="https://picsum.photos/400/200" style="width: 100%; border-radius: 6px 6px 0 0;" />
+        </ng-template>
+        <p style="color: #666; margin: 0;">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+          numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
+          cupiditate neque quas!
+        </p>
+        <ng-template pTemplate="footer">
+          <div style="display: flex; gap: 8px;">
+            <p-button label="Save" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+            <p-button label="Cancel" icon="pi pi-times" severity="secondary" styleClass="p-button-sm"></p-button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+
+    <!-- Chips and Badges -->
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Chips & Badges</h2>
+
+      <div style="margin-bottom: 20px;">
+        <h3 style="color: #666; font-size: 1.1rem; margin-bottom: 12px;">Chips</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <p-chip label="Apple" icon="pi pi-apple"></p-chip>
+          <p-chip label="Facebook" icon="pi pi-facebook" styleClass="custom-chip-primary"></p-chip>
+          <p-chip label="Google" icon="pi pi-google" styleClass="custom-chip-danger"></p-chip>
+          <p-chip label="Microsoft" image="https://picsum.photos/32/32"></p-chip>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="color: #666; font-size: 1.1rem; margin-bottom: 12px;">Badges</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+          <p-badge value="2"></p-badge>
+          <p-badge value="8" severity="success"></p-badge>
+          <p-badge value="4" severity="info"></p-badge>
+          <p-badge value="12" severity="warn"></p-badge>
+          <p-badge value="3" severity="danger"></p-badge>
+          <p-badge value="New" severity="secondary"></p-badge>
+          <p-badge value="1" size="xlarge" severity="success"></p-badge>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Example -->
+    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2 style="color: #333; font-size: 1.5rem; margin-bottom: 20px;">Complete Form Example</h2>
+
+      <form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; color: #333;">
+        <div>
+          <label for="firstname" style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">First Name</label>
+          <input pInputText id="firstname" type="text" class="text" style="width: 100%; color: black" />
+        </div>
+
+        <div>
+          <label for="lastname" style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Last Name</label>
+          <input pInputText id="lastname" type="text" style="width: 100%; color: black;" />
+        </div>
+
+        <div>
+          <label for="email" style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Email</label>
+          <input pInputText id="email" type="email" style="width: 100%; color: black;" />
+        </div>
+
+        <div>
+          <label for="phone" style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Phone</label>
+          <p-inputMask id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999" [style]="{'width': '100%', 'color': 'black'}"></p-inputMask>
+        </div>
+
+        <div style="grid-column: 1 / -1;">
+          <label for="message" style="color: #666; display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
+          <textarea pTextarea id="message" rows="4" style="width: 100%; color: black"></textarea>
+        </div>
+
+        <div style="grid-column: 1 / -1; display: flex; align-items: center; gap: 8px;">
+          <p-checkbox [binary]="true" inputId="agree"></p-checkbox>
+          <label for="agree" style="color: #666;">I agree to the terms and conditions</label>
+        </div>
+
+        <div style="grid-column: 1 / -1; display: flex; gap: 10px; justify-content: flex-end;">
+          <p-button label="Cancel" severity="secondary" [outlined]="true"></p-button>
+          <p-button label="Submit" icon="pi pi-check"></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .custom-chip-primary {
+      background-color: #3B82F6 !important;
+      color: white !important;
+    }
+    .custom-chip-danger {
+      background-color: #EF4444 !important;
+      color: white !important;
+    }
+  </style>
+</ion-content>
